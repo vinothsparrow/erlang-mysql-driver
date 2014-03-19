@@ -124,7 +124,7 @@ loop(State) ->
     receive
 	{tcp, Sock, InData} ->
 	    NewData = list_to_binary([State#state.data, InData]),
-	    mysql:log(State#state.log_fun, normal, "mysql_recv: "
+	    mysql:log(State#state.log_fun, debug, "mysql_recv: "
 		      "Socket received : ~p", [ NewData]),	    
 	    %% send data to parent if we have enough data	    
 	    Rest = sendpacket(State#state.parent, NewData),

@@ -253,7 +253,7 @@ do_recv(LogFun, RecvPid, SeqNum) when is_function(LogFun);
 				      SeqNum == undefined ->
     receive
         {mysql_recv, RecvPid, data, Packet, Num} ->
-            mysql:log(LogFun, normal, "mysql_conn: recv packet ~p:
+            mysql:log(LogFun, debug, "mysql_conn: recv packet ~p:
             ~p", [Num, Packet]),
 	    {ok, Packet, Num};
 	{mysql_recv, RecvPid, closed, _E} ->
@@ -350,7 +350,7 @@ loop(State) ->
 	    case is_pid(GenSrvFrom) of
 		true ->
 		    %% The query was not sent using gen_server mechanisms		    
-		    mysql:log(State#state.log_fun, normal, "mysql_conn: "
+		    mysql:log(State#state.log_fun, debug, "mysql_conn: "
 		      "Received result ~p query:~p options:~p state:~p ~n", [Res,Query,Options,State]),		   
 		      case Res of
 		      [List] when length([List])==1 ->	      
